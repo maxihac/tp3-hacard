@@ -1,0 +1,40 @@
+{% extends 'naval_app/index.html' %}
+
+{% block titulo %}
+    Lista de Buques
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Buques Registrados</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>IMO</th>
+                <th>Eslora</th>
+                <th>Manga</th>
+                <th>Puntal</th>
+                <th>Tripulantes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buque in buques %}
+            <tr>
+                <td>{{ buque.nombre }}</td>
+                <td>{{ buque.imo }}</td>
+                <td>{{ buque.eslora }}</td>
+                <td>{{ buque.manga }}</td>
+                <td>{{ buque.puntal }}</td>
+                <td>{{ buque.tripulantes }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No hay buques registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+{% endblock %}
