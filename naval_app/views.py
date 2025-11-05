@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from naval_app.forms import *
 from .models import Buque
+
 # Create your views here.
 def index(request):
     return render(request,"naval_app/index.html")

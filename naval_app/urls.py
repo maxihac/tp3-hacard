@@ -6,5 +6,6 @@ urlpatterns = [
     path("", index , name="index"),
     path('buque/nuevo/', crear_buque, name="buque_form"),
     path('buques/', listar_buques, name='buque_list'),
+    
 
 ]

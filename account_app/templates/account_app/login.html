@@ -1,0 +1,54 @@
+{% extends "naval_app/index.html" %}
+{% load widget_tweaks %}
+
+{% block contenido %}
+<!-- Modal trigger invisible (se activa con JS) -->
+<button type="button" class="btn btn-primary d-none" id="openLoginModal" data-bs-toggle="modal" data-bs-target="#loginModal">
+  Abrir login
+</button>
+
+<!-- Modal -->
+<div class="modal fade show" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" style="display: block;" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Iniciar sesión</h5>
+        </div>
+        <div class="modal-body">
+          {% for field in form.visible_fields %}
+            <div class="form-group mb-3">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field|add_class:"form-control" }}
+              {% for error in field.errors %}
+                <div class="text-danger">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger mt-3">
+              {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Script para abrir el modal automáticamente -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const modalTrigger = document.getElementById('openLoginModal');
+    if (modalTrigger) {
+      modalTrigger.click();
+    }
+  });
+</script>
+{% endblock %}

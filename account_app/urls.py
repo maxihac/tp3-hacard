@@ -1,0 +1,8 @@
+from django.urls import path
+from django.contrib.auth.views import LoginView,LogoutView
+from django.views.generic import TemplateView
+from account_app.views import CustomLoginView
+
+urlpatterns = [
+    path("login/",CustomLoginView.as_view(),name="login")
+]
