@@ -21,7 +21,11 @@ def crear_buque(request):
 
 @login_required
 def listar_buques(request):
-    buques = Buque.objects.all()
+    query = request.GET.get('q')
+    if query:
+        buques = Buque.objects.filter(nombre__icontains=query)
+    else:
+        buques = Buque.objects.all()
     return render(request, 'naval_app/buque_list.html', {'buques': buques})
 @login_required
 def editar_buque(request, pk):
